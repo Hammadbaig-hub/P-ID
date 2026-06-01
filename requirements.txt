@@ -1,10 +1,16 @@
-# Image processing
-opencv-python>=4.9
-Pillow>=10.0
+# Core
 numpy>=1.26
+Pillow>=10.0
+opencv-python-headless>=4.9
+matplotlib>=3.9
+PyYAML>=6.0
+python-dotenv>=1.0
+tqdm>=4.66
+pydantic>=2.7
+scipy>=1.13
 
-# Object detection
-ultralytics>=8.2          # YOLOv8/v11
+# Detection
+ultralytics>=8.2
 torch>=2.2
 torchvision>=0.17
 
@@ -14,18 +20,17 @@ paddleocr>=2.7
 
 # Graph
 networkx>=3.3
-neo4j>=5.19               # optional: Neo4j driver
+plotly>=5.22
+pyvis>=0.3
 
-# LLM / chatbot
+# Web UI
+streamlit>=1.35
+pandas>=2.2
+altair>=5.3
+
+# AI / LLM
 anthropic>=0.28
-openai>=1.30              # optional fallback
 
-# Utilities
-tqdm>=4.66
-pydantic>=2.7
-python-dotenv>=1.0
-PyYAML>=6.0
-
-# Notebooks
-jupyter>=1.0
-matplotlib>=3.9
+# Export / utils
+openpyxl>=3.1
+lxml>=5.2

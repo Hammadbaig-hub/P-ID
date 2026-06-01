@@ -1,0 +1,62 @@
+project:
+  name: "P&ID Intelligence Platform"
+  version: "1.0.0"
+
+generator:
+  fig_width: 24.0       # inches
+  fig_height: 12.0      # inches
+  dpi: 100
+  img_width: 2400       # pixels
+  img_height: 1200      # pixels
+  background: "white"
+  line_color: "#1a1a1a"
+  line_width: 2.0
+  font_family: "DejaVu Sans Mono"
+
+symbols:
+  classes:
+    - {id: 0,  name: gate_valve,            abbr: GV}
+    - {id: 1,  name: globe_valve,           abbr: GLV}
+    - {id: 2,  name: check_valve,           abbr: CV}
+    - {id: 3,  name: control_valve,         abbr: FCV}
+    - {id: 4,  name: ball_valve,            abbr: BV}
+    - {id: 5,  name: butterfly_valve,       abbr: BFV}
+    - {id: 6,  name: centrifugal_pump,      abbr: P}
+    - {id: 7,  name: tank,                  abbr: T}
+    - {id: 8,  name: vessel,                abbr: V}
+    - {id: 9,  name: column,                abbr: C}
+    - {id: 10, name: heat_exchanger,        abbr: E}
+    - {id: 11, name: pressure_instrument,   abbr: PI}
+    - {id: 12, name: temperature_instrument,abbr: TI}
+    - {id: 13, name: flow_instrument,       abbr: FI}
+    - {id: 14, name: level_instrument,      abbr: LI}
+    - {id: 15, name: analyzer_instrument,   abbr: AI}
+
+detection:
+  model_path: "detection/models/pid_detector.pt"
+  confidence: 0.25
+  iou: 0.45
+  img_size: 640
+  device: "cpu"
+
+training:
+  epochs: 50
+  batch: 16
+  img_size: 640
+  num_images: 200
+  patience: 10
+  split: {train: 0.7, val: 0.2, test: 0.1}
+
+ocr:
+  lang: "en"
+  use_gpu: false
+  min_confidence: 0.5
+  det_db_thresh: 0.3
+
+graph:
+  export_formats: ["json", "graphml"]
+
+chatbot:
+  model: "claude-opus-4-5"
+  max_tokens: 2048
+  temperature: 0.3

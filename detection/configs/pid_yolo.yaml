@@ -1,0 +1,23 @@
+path: data/yolo_dataset
+train: images/train
+val: images/val
+test: images/test
+
+nc: 16
+names:
+  - gate_valve
+  - globe_valve
+  - check_valve
+  - control_valve
+  - ball_valve
+  - butterfly_valve
+  - centrifugal_pump
+  - tank
+  - vessel
+  - column
+  - heat_exchanger
+  - pressure_instrument
+  - temperature_instrument
+  - flow_instrument
+  - level_instrument
+  - analyzer_instrument
