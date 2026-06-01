@@ -61,11 +61,19 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
+# ── API key: Streamlit secrets first, env var as local-dev fallback ───────
+def _get_api_key() -> str:
+    try:
+        return st.secrets["ANTHROPIC_API_KEY"]
+    except (KeyError, FileNotFoundError, AttributeError):
+        return os.getenv("ANTHROPIC_API_KEY", "")
+
+
 # ── Lazy pipeline import (avoids import errors at startup) ────────────────
 @st.cache_resource(show_spinner=False)
-def get_pipeline(api_key: str = ""):
+def get_pipeline():
     from src.pipeline import Pipeline
-    return Pipeline(api_key=api_key or None)
+    return Pipeline(api_key=_get_api_key() or None)
 
 
 # ── Session state defaults ────────────────────────────────────────────────
@@ -74,7 +82,6 @@ def _init_state():
         "result": None,
         "messages": [],
         "pipeline_ready": False,
-        "api_key": os.getenv("ANTHROPIC_API_KEY", ""),
     }
     for k, v in defaults.items():
         if k not in st.session_state:
@@ -97,22 +104,6 @@ st.markdown("""
 # ═══════════════════════════════════════════════════════════════════════════
 with st.sidebar:
     st.markdown("## ⚙️ Control Panel")
-
-    # ── API Key ──────────────────────────────────────────────────────────
-    with st.expander("🔑 Anthropic API Key", expanded=not st.session_state.api_key):
-        key_input = st.text_input(
-            "API Key", type="password",
-            value=st.session_state.api_key,
-            placeholder="sk-ant-…",
-            help="Required for the AI Chat tab",
-        )
-        if key_input != st.session_state.api_key:
-            st.session_state.api_key = key_input
-            if st.session_state.pipeline_ready and st.session_state.result:
-                pipe = get_pipeline.__wrapped__(key_input)
-                pipe.update_api_key(key_input)
-
-    st.divider()
 
     # ── Input ─────────────────────────────────────────────────────────────
     st.markdown("### 📥 Input")
@@ -165,7 +156,7 @@ with st.sidebar:
 # RUN PIPELINE
 # ═══════════════════════════════════════════════════════════════════════════
 if run_clicked:
-    pipe = get_pipeline(st.session_state.api_key)
+    pipe = get_pipeline()
     # Update conf threshold
     pipe.cfg.setdefault("detection", {})["confidence"] = conf_thresh
     pipe.detector.conf = conf_thresh
@@ -363,7 +354,7 @@ with tab_detect:
             st.caption("Annotated (detections + OCR)")
             annotated = result.annotated_image
             if result.ocr_regions:
-                annotated = get_pipeline(st.session_state.api_key).ocr.annotate(
+                annotated = get_pipeline().ocr.annotate(
                     annotated, result.ocr_regions
                 )
             st.image(annotated, use_container_width=True)
@@ -440,13 +431,7 @@ with tab_chat:
     if result is None:
         st.info("Run the analysis first, then chat about your P&ID.")
     else:
-        pipe = get_pipeline(st.session_state.api_key)
-
-        if not st.session_state.api_key:
-            st.warning(
-                "⚠️ No Anthropic API key set. Add your key in the sidebar to enable chat.",
-                icon="🔑",
-            )
+        pipe = get_pipeline()
 
         # ── Suggested questions ───────────────────────────────────────────
         st.markdown("**💡 Suggested questions:**")
@@ -469,10 +454,7 @@ with tab_chat:
                     st.markdown(msg["content"])
 
         # ── Input ─────────────────────────────────────────────────────────
-        if prompt := st.chat_input(
-            "Ask anything about this P&ID diagram …",
-            disabled=not st.session_state.api_key,
-        ):
+        if prompt := st.chat_input("Ask anything about this P&ID diagram …"):
             st.session_state.messages.append({"role": "user", "content": prompt})
             with chat_container:
                 with st.chat_message("user"):
