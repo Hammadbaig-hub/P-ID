@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+
+# Models (large binary files — store in DVC or cloud)
+detection/models/*.pt
+detection/models/*.pth
+detection/models/*.onnx
+ocr/models/
+
+# Outputs (generated, not source-controlled)
+detection/outputs/
+ocr/outputs/
+graph/outputs/
+data/exports/
+
+# Chatbot session state
+chatbot/memory/*.json
+
+# Environment
+.env
+.env.*
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
