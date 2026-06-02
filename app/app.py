@@ -160,25 +160,188 @@ html, body, [class*="css"] {
     border-bottom: 1px solid #dde3ec;
 }
 
-/* ── Chat bubbles ── */
-.chat-user {
-    background: #eef4fb;
-    border-left: 3px solid #0696D7;
-    border-radius: 2px;
-    padding: 0.75rem 1rem;
-    margin: 0.4rem 0;
-    font-size: 0.88rem;
+/* ── Chat message bubbles (st.chat_message overrides) ── */
+[data-testid="stChatMessage"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0.35rem 0 !important;
+    gap: 0.7rem !important;
+    align-items: flex-start !important;
 }
-.chat-assistant {
-    background: #f8f9fb;
-    border-left: 3px solid #0a1628;
-    border-radius: 2px;
-    padding: 0.75rem 1rem;
-    margin: 0.4rem 0;
-    font-size: 0.88rem;
+[data-testid="stChatMessageContent"] {
+    padding: 0.75rem 1.05rem !important;
+    max-width: 78% !important;
+    font-size: 0.88rem !important;
+    line-height: 1.6 !important;
 }
 
-/* ── Suggestion buttons ── */
+/* User bubble — right aligned */
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) {
+    flex-direction: row-reverse !important;
+}
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) [data-testid="stChatMessageContent"] {
+    background: #0a1628 !important;
+    border-radius: 18px 4px 18px 18px !important;
+    box-shadow: 0 2px 6px rgba(10,22,40,0.22) !important;
+}
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) [data-testid="stChatMessageContent"] p,
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-user"]) [data-testid="stChatMessageContent"] li {
+    color: #e8f0fb !important;
+    margin: 0 !important;
+}
+
+/* Assistant bubble — left aligned */
+[data-testid="stChatMessage"]:has([data-testid="chatAvatarIcon-assistant"]) [data-testid="stChatMessageContent"] {
+    background: #ffffff !important;
+    border: 1px solid #dde3ec !important;
+    border-radius: 4px 18px 18px 18px !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06) !important;
+    color: #0a1628 !important;
+}
+
+/* Avatars */
+[data-testid="chatAvatarIcon-user"] {
+    background: #0696D7 !important;
+    border-radius: 50% !important;
+    width: 34px !important; height: 34px !important; min-width: 34px !important;
+    flex-shrink: 0 !important;
+}
+[data-testid="chatAvatarIcon-assistant"] {
+    background: #0a1628 !important;
+    border-radius: 50% !important;
+    width: 34px !important; height: 34px !important; min-width: 34px !important;
+    flex-shrink: 0 !important;
+}
+
+/* Chat input */
+[data-testid="stChatInput"] textarea {
+    border-radius: 24px !important;
+    border: 1.5px solid #c8d4e3 !important;
+    background: #f8fafc !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.88rem !important;
+    padding: 0.7rem 1.2rem !important;
+    resize: none !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+[data-testid="stChatInput"] textarea:focus {
+    border-color: #0696D7 !important;
+    box-shadow: 0 0 0 3px rgba(6,150,215,0.12) !important;
+    outline: none !important;
+    background: #ffffff !important;
+}
+[data-testid="stChatInputSubmitButton"] button {
+    background: #0696D7 !important;
+    border: none !important;
+    border-radius: 50% !important;
+}
+[data-testid="stChatInputSubmitButton"] button:hover {
+    background: #0579b0 !important;
+}
+
+/* ── Welcome / empty state ── */
+.chat-welcome {
+    text-align: center;
+    padding: 2.5rem 1rem 1.2rem;
+}
+.chat-welcome-orb {
+    width: 60px; height: 60px;
+    background: #0a1628;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.1rem;
+    box-shadow: 0 4px 16px rgba(10,22,40,0.25);
+}
+.chat-welcome-title {
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    color: #0a1628 !important;
+    margin-bottom: 0.35rem !important;
+}
+.chat-welcome-sub {
+    font-size: 0.84rem;
+    color: #5d7292;
+    max-width: 460px;
+    margin: 0 auto 1.8rem;
+    line-height: 1.6;
+}
+
+/* Suggested question chip buttons */
+[data-testid="baseButton-secondary"] {
+    background: #f0f7ff !important;
+    border: 1px solid #b8d4f0 !important;
+    border-radius: 20px !important;
+    color: #0a1628 !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    padding: 0.45rem 0.9rem !important;
+    text-align: left !important;
+    white-space: normal !important;
+    height: auto !important;
+    min-height: 2.4rem !important;
+    line-height: 1.35 !important;
+    transition: all 0.15s ease !important;
+}
+[data-testid="baseButton-secondary"]:hover {
+    background: #0696D7 !important;
+    border-color: #0696D7 !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 3px 10px rgba(6,150,215,0.25) !important;
+}
+
+/* Clear conversation subtle override */
+.clear-btn-row [data-testid="baseButton-secondary"] {
+    background: transparent !important;
+    border: 1px solid #dde3ec !important;
+    border-radius: 3px !important;
+    color: #5d7292 !important;
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.7rem !important;
+    min-height: 1.8rem !important;
+    transform: none !important;
+}
+.clear-btn-row [data-testid="baseButton-secondary"]:hover {
+    background: #fdf0f0 !important;
+    border-color: #e8b0b0 !important;
+    color: #8b2020 !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* Chips label */
+.chips-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #5d7292;
+    text-transform: uppercase;
+    letter-spacing: 0.9px;
+    text-align: center;
+    margin-bottom: 0.6rem;
+}
+
+/* Typing animation */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0.1rem 0;
+}
+.typing-dot {
+    width: 7px; height: 7px;
+    background: #0696D7;
+    border-radius: 50%;
+    animation: tdot 1.3s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.18s; }
+.typing-dot:nth-child(3) { animation-delay: 0.36s; }
+@keyframes tdot {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+    30% { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ── Suggestion buttons (general) ── */
 .stButton > button {
     font-size: 0.82rem;
     font-weight: 500;
@@ -666,26 +829,57 @@ with tab_chat:
                     unsafe_allow_html=True)
     else:
         pipe = get_pipeline()
-
-        st.markdown('<div class="section-label">Suggested Questions</div>',
-                    unsafe_allow_html=True)
         suggestions = pipe.assistant.suggested_questions()
-        cols = st.columns(2)
-        for i, q in enumerate(suggestions[:6]):
-            if cols[i % 2].button(q, key=f"sug_{i}", use_container_width=True):
-                st.session_state.messages.append({"role": "user", "content": q})
-                with st.spinner("Processing..."):
-                    response = pipe.chat(q)
-                st.session_state.messages.append({"role": "assistant", "content": response})
+        has_messages = bool(st.session_state.messages)
 
-        st.divider()
+        # ── Empty state: welcome orb + suggestion chips ───────────────────
+        if not has_messages:
+            st.markdown("""
+            <div class="chat-welcome">
+                <div class="chat-welcome-orb">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+                    </svg>
+                </div>
+                <div class="chat-welcome-title">P&amp;ID AI Assistant</div>
+                <div class="chat-welcome-sub">
+                    Ask questions about detected equipment, process flows, instrument tags,
+                    or engineering specifications in your diagram.
+                </div>
+            </div>
+            <p class="chips-label">Suggested Questions</p>
+            """, unsafe_allow_html=True)
 
-        chat_container = st.container(height=420)
-        with chat_container:
-            for msg in st.session_state.messages:
-                with st.chat_message(msg["role"]):
-                    st.markdown(msg["content"])
+            chip_cols = st.columns(3)
+            for i, q in enumerate(suggestions[:6]):
+                if chip_cols[i % 3].button(q, key=f"chip_{i}", use_container_width=True):
+                    st.session_state.messages.append({"role": "user", "content": q})
+                    with st.spinner(""):
+                        response = pipe.chat(q)
+                    st.session_state.messages.append({"role": "assistant", "content": response})
+                    st.rerun()
 
+            chat_container = st.container()
+
+        # ── Conversation view ─────────────────────────────────────────────
+        else:
+            chat_container = st.container(height=480)
+            with chat_container:
+                for msg in st.session_state.messages:
+                    with st.chat_message(msg["role"]):
+                        st.markdown(msg["content"])
+
+            # Clear button — right-aligned, subtle
+            _, rcol = st.columns([6, 1])
+            with rcol:
+                st.markdown('<div class="clear-btn-row">', unsafe_allow_html=True)
+                if st.button("Clear", key="clear_chat"):
+                    st.session_state.messages = []
+                    pipe.assistant.clear_history()
+                    st.rerun()
+                st.markdown('</div>', unsafe_allow_html=True)
+
+        # ── Chat input (always rendered) ──────────────────────────────────
         if prompt := st.chat_input("Ask anything about this P&ID diagram..."):
             st.session_state.messages.append({"role": "user", "content": prompt})
             with chat_container:
@@ -694,6 +888,12 @@ with tab_chat:
 
                 with st.chat_message("assistant"):
                     text_holder = st.empty()
+                    # Typing indicator until first token
+                    text_holder.markdown("""<div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>""", unsafe_allow_html=True)
                     full = ""
                     try:
                         for chunk in pipe.chat_stream(prompt):
@@ -706,12 +906,7 @@ with tab_chat:
                     st.session_state.messages.append(
                         {"role": "assistant", "content": full}
                     )
-
-        if st.session_state.messages:
-            if st.button("Clear Conversation", key="clear_chat"):
-                st.session_state.messages = []
-                pipe.assistant.clear_history()
-                st.rerun()
+            st.rerun()
 
 
 # ── Professional footer ───────────────────────────────────────────────────
