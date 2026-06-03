@@ -39,22 +39,23 @@ html, body, [class*="css"] {
 
 /* ── Top bar ── */
 .top-bar {
-    background: #0a1628;
+    background: linear-gradient(90deg, #0a1628 0%, #0d1d35 100%);
     padding: 0.7rem 2rem;
     margin: -1rem -1rem 1.5rem -1rem;
     display: flex;
     align-items: center;
     gap: 1rem;
-    border-bottom: 3px solid #0696D7;
+    border-bottom: 2px solid #0696D7;
 }
 .top-bar-icon {
     width: 32px;
     height: 32px;
     background: #0696D7;
-    border-radius: 4px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 .top-bar-icon svg {
     width: 18px;
@@ -69,20 +70,21 @@ html, body, [class*="css"] {
     line-height: 1.2;
 }
 .top-bar-subtitle {
-    font-size: 0.72rem;
+    font-size: 0.71rem;
     color: #7a96bb;
     font-weight: 400;
     letter-spacing: 0.2px;
+    margin-top: 2px;
 }
 .top-bar-badge {
     margin-left: auto;
     background: rgba(6,150,215,0.15);
-    border: 1px solid #0696D7;
+    border: 1px solid rgba(6,150,215,0.6);
     color: #0696D7;
-    font-size: 0.68rem;
+    font-size: 0.67rem;
     font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 2px;
+    padding: 3px 10px;
+    border-radius: 12px;
     letter-spacing: 0.5px;
 }
 
@@ -371,24 +373,36 @@ html, body, [class*="css"] {
 /* ── Professional footer ── */
 .pro-footer {
     margin-top: 3rem;
-    padding: 1rem 1.5rem;
-    background: #0a1628;
-    border-radius: 4px;
+    padding: 0.9rem 1.6rem;
+    background: linear-gradient(90deg, #0a1628 0%, #0d1d35 100%);
+    border-radius: 6px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.6rem;
+    border-top: 2px solid #0696D7;
 }
 .pro-footer-left {
     font-size: 0.72rem;
     color: #7a96bb;
     font-weight: 500;
+    letter-spacing: 0.1px;
 }
 .pro-footer-right {
-    font-size: 0.68rem;
-    color: #4a6280;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.pro-footer-badge {
+    font-size: 0.65rem;
+    color: #5a7899;
+    font-weight: 600;
     letter-spacing: 0.3px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2px 8px;
+    border-radius: 10px;
 }
 .pro-footer span {
     color: #0696D7;
@@ -467,8 +481,7 @@ st.markdown("""
 <div class="top-bar">
     <div class="top-bar-icon">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
-                     10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+            <path d="M12 15.5a3.5 3.5 0 01-3.5-3.5A3.5 3.5 0 0112 8.5a3.5 3.5 0 013.5 3.5 3.5 3.5 0 01-3.5 3.5m7.43-2.92c.04-.3.07-.6.07-.93s-.03-.63-.07-.93l2-1.63c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54C14.44 2.17 14.24 2 14 2h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.2-.08.47.12.61l2 1.63c-.04.3-.06.62-.06.93s.02.63.06.93l-2 1.63c-.2.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.49.37 1.03.7 1.62.94l.36 2.54c.04.24.23.41.47.41H14c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.57 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.2.07-.47-.12-.61l-2-1.63z"/>
         </svg>
     </div>
     <div>
@@ -918,7 +931,9 @@ st.markdown("""
         Powered by YOLO26 · PaddleOCR · NetworkX · Claude AI
     </div>
     <div class="pro-footer-right">
-        ISA S5.1 Compliant &nbsp;·&nbsp; ISO 10628 Compliant &nbsp;·&nbsp; 2024
+        <span class="pro-footer-badge">ISA S5.1</span>
+        <span class="pro-footer-badge">ISO 10628</span>
+        <span class="pro-footer-badge">2024</span>
     </div>
 </div>
 """, unsafe_allow_html=True)
