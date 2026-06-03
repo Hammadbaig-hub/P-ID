@@ -599,7 +599,7 @@ with tab_dash:
             st.markdown("""
             #### Platform Capabilities
             1. **Generate** realistic P&ID diagrams with ISA-compliant symbols
-            2. **Detect** equipment, valves, and instruments using YOLOv8
+            2. **Detect** equipment, valves, and instruments using YOLO26
             3. **Extract** tag numbers and labels with PaddleOCR
             4. **Build** a knowledge graph with NetworkX
             5. **Chat** with an AI engineer about your P&ID
@@ -915,7 +915,7 @@ st.markdown("""
     <div class="pro-footer-left">
         <span>P&amp;ID Intelligence Platform</span> &nbsp;v1.0.0
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        Powered by YOLOv8 · PaddleOCR · NetworkX · Claude AI
+        Powered by YOLO26 · PaddleOCR · NetworkX · Claude AI
     </div>
     <div class="pro-footer-right">
         ISA S5.1 Compliant &nbsp;·&nbsp; ISO 10628 Compliant &nbsp;·&nbsp; 2024
