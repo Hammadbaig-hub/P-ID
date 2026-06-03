@@ -1,6 +1,6 @@
 streamlit>=1.35
 opencv-python-headless>=4.9
-ultralytics>=8.2
+ultralytics>=8.4.60
 pytesseract>=0.3
 networkx>=3.3
 anthropic>=0.28

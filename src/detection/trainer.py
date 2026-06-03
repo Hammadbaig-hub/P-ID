@@ -1,6 +1,6 @@
 """
 YOLO Trainer
-Trains a YOLOv8-nano model on a generated P&ID dataset.
+Trains a YOLO26-nano model on a generated P&ID dataset.
 """
 
 from pathlib import Path
@@ -19,8 +19,8 @@ class Trainer:
         self.model_out.parent.mkdir(parents=True, exist_ok=True)
 
     def train(self, dataset_yaml: str = "data/yolo_dataset/dataset.yaml",
-              pretrained: str = "yolov8n.pt") -> Path:
-        """Train YOLOv8-nano on the synthetic dataset. Returns path to best.pt."""
+              pretrained: str = "yolo26n.pt") -> Path:
+        """Train YOLO26-nano on the synthetic dataset. Returns path to best.pt."""
         try:
             from ultralytics import YOLO
         except ImportError:

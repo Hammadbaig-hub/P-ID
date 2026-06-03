@@ -1,6 +1,6 @@
 """
 Symbol Detector
-Wraps YOLOv8 inference. Falls back to metadata-based mock detection when
+Wraps YOLO26 inference. Falls back to metadata-based mock detection when
 no trained model is present (useful for generated images that have sidecar
 JSON files).
 """
@@ -80,7 +80,7 @@ class Detector:
 
     Priority
     --------
-    1. YOLO model (if model_path exists and ultralytics is installed)
+    1. YOLO26 model (if model_path exists and ultralytics is installed)
     2. Metadata sidecar JSON (for generated images)
     3. Empty result with warning
     """
@@ -102,7 +102,7 @@ class Detector:
         try:
             from ultralytics import YOLO
             self._model = YOLO(str(self.model_path))
-            print(f"[Detector] Loaded YOLO model from {self.model_path}")
+            print(f"[Detector] Loaded YOLO26 model from {self.model_path}")
         except Exception as e:
             print(f"[Detector] Could not load model: {e}")
 
