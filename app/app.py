@@ -540,7 +540,7 @@ with st.sidebar:
     st.divider()
     st.markdown(
         "<small style='color:#5d7292;line-height:1.6'>"
-        "P&amp;ID Intelligence Platform v1.0<br>"
+        "P&amp;ID Intelligence Platform<br>"
         "ISA S5.1 · ISO 10628 compliant</small>",
         unsafe_allow_html=True
     )
@@ -927,8 +927,6 @@ st.markdown("""
 <div class="pro-footer">
     <div class="pro-footer-left">
         <span>P&amp;ID Intelligence Platform</span> &nbsp;v1.0.0
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        Powered by YOLO26 · PaddleOCR · NetworkX · Claude AI
     </div>
     <div class="pro-footer-right">
         <span class="pro-footer-badge">ISA S5.1</span>

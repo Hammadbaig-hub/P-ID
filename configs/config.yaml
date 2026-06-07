@@ -57,6 +57,6 @@ graph:
   export_formats: ["json", "graphml"]
 
 chatbot:
-  model: "claude-opus-4-5"
+  model: "claude-opus-4-8"
   max_tokens: 2048
   temperature: 0.3

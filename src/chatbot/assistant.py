@@ -71,7 +71,7 @@ class PIDAssistant:
     def __init__(self, cfg: dict | None = None, api_key: str | None = None):
         self.cfg     = cfg or {}
         bot_cfg      = self.cfg.get("chatbot", {})
-        self.model   = bot_cfg.get("model", "claude-opus-4-5")
+        self.model   = bot_cfg.get("model", "claude-opus-4-8")
         self.max_tok = bot_cfg.get("max_tokens", 2048)
         self.temp    = bot_cfg.get("temperature", 0.3)
 
