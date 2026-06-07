@@ -8,10 +8,9 @@ dist/
 build/
 
 # Models (large binary files — store in DVC or cloud)
-*.pt
-*.pth
-*.onnx
-detection/models/
+detection/models/*.pt
+detection/models/*.pth
+detection/models/*.onnx
 ocr/models/
 
 # Outputs (generated, not source-controlled)
@@ -19,13 +18,6 @@ detection/outputs/
 ocr/outputs/
 graph/outputs/
 data/exports/
-images/processed/*.png
-images/processed/*.json
-
-# Frontend build artifacts
-frontend/.next/
-frontend/node_modules/
-frontend/.env*.local
 
 # Chatbot session state
 chatbot/memory/*.json
