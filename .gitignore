@@ -18,6 +18,11 @@ detection/outputs/
 ocr/outputs/
 graph/outputs/
 data/exports/
+data/yolo_dataset/
+runs/
+
+# Pretrained / downloaded weights at repo root
+/*.pt
 
 # Chatbot session state
 chatbot/memory/*.json

@@ -40,51 +40,51 @@ html, body, [class*="css"] {
 /* ── Top bar ── */
 .top-bar {
     background: linear-gradient(90deg, #0a1628 0%, #0d1d35 100%);
-    padding: 0.7rem 2rem;
+    padding: 1.5rem 2.5rem;
     margin: -1rem -1rem 1.5rem -1rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    border-bottom: 2px solid #0696D7;
+    gap: 1.4rem;
+    border-bottom: 3px solid #0696D7;
 }
 .top-bar-icon {
-    width: 32px;
-    height: 32px;
+    width: 52px;
+    height: 52px;
     background: #0696D7;
-    border-radius: 5px;
+    border-radius: 9px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
 .top-bar-icon svg {
-    width: 18px;
-    height: 18px;
+    width: 28px;
+    height: 28px;
     fill: #ffffff;
 }
 .top-bar-title {
-    font-size: 1.05rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #ffffff;
     letter-spacing: 0.3px;
     line-height: 1.2;
 }
 .top-bar-subtitle {
-    font-size: 0.71rem;
+    font-size: 0.9rem;
     color: #7a96bb;
     font-weight: 400;
     letter-spacing: 0.2px;
-    margin-top: 2px;
+    margin-top: 4px;
 }
 .top-bar-badge {
     margin-left: auto;
     background: rgba(6,150,215,0.15);
     border: 1px solid rgba(6,150,215,0.6);
     color: #0696D7;
-    font-size: 0.67rem;
+    font-size: 0.82rem;
     font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 12px;
+    padding: 6px 16px;
+    border-radius: 16px;
     letter-spacing: 0.5px;
 }
 
@@ -373,18 +373,18 @@ html, body, [class*="css"] {
 /* ── Professional footer ── */
 .pro-footer {
     margin-top: 3rem;
-    padding: 0.9rem 1.6rem;
+    padding: 1.2rem 2.5rem;
     background: linear-gradient(90deg, #0a1628 0%, #0d1d35 100%);
     border-radius: 6px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.6rem;
-    border-top: 2px solid #0696D7;
+    gap: 0.8rem;
+    border-top: 3px solid #0696D7;
 }
 .pro-footer-left {
-    font-size: 0.72rem;
+    font-size: 0.85rem;
     color: #7a96bb;
     font-weight: 500;
     letter-spacing: 0.1px;
@@ -392,17 +392,17 @@ html, body, [class*="css"] {
 .pro-footer-right {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.6rem;
 }
 .pro-footer-badge {
-    font-size: 0.65rem;
+    font-size: 0.76rem;
     color: #5a7899;
     font-weight: 600;
     letter-spacing: 0.3px;
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.08);
-    padding: 2px 8px;
-    border-radius: 10px;
+    padding: 4px 12px;
+    border-radius: 12px;
 }
 .pro-footer span {
     color: #0696D7;
@@ -612,9 +612,9 @@ with tab_dash:
             st.markdown("""
             #### Platform Capabilities
             1. **Generate** realistic P&ID diagrams with ISA-compliant symbols
-            2. **Detect** equipment, valves, and instruments using YOLO26
-            3. **Extract** tag numbers and labels with PaddleOCR
-            4. **Build** a knowledge graph with NetworkX
+            2. **Detect** equipment, valves, and instruments automatically
+            3. **Extract** tag numbers and labels using OCR
+            4. **Build** a knowledge graph of all process connections
             5. **Chat** with an AI engineer about your P&ID
             """)
         with _col2:
@@ -650,6 +650,10 @@ with tab_dash:
             </div>""", unsafe_allow_html=True)
 
         st.markdown("<br>", unsafe_allow_html=True)
+
+        with st.expander("🔍 View detected-symbols diagram at full size"):
+            st.image(result.annotated_image,
+                     caption="Bounding boxes coloured by class — full resolution")
 
         img_col, chart_col = st.columns([2, 1])
         with img_col:
